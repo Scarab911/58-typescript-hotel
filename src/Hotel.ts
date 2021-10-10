@@ -1,10 +1,11 @@
 // import { Room } from "./Room";
+// import { Spa } from "./Spa";
 
 class Hotel {
-    public readonly name: string;
-    public readonly adress: string;
-    public readonly stars: number;
-    public rooms: {}[];
+    public name: string;
+    public adress: string;
+    public stars: number;
+    public rooms: Room[];
 
     public constructor(name: string,
                  adress: string,
@@ -16,34 +17,38 @@ class Hotel {
         this.rooms = [];
     }
 
-    //spausdinam Hotel info i konsole:
-    public printData(onlyComfort?: boolean): void {
-        if(!onlyComfort){
-            console.log(' ');
-        } else {
-            console.log(`Name: ${this.name}`);
-            console.log(`Adress: ${this.adress}`);
-            console.log(`${this.stars} stars`);
-        }
-    }
-
     // pridedam kambary i masyva:
     addRoom(room: Room): void {
         this.rooms.push(room);
     }
-
+    
     //spausdinam kambarius
-    public printRooms(minComfort?: number): void {
-        this.printData(false)
-        console.log(this.rooms);
-        
+    private printRooms(minComfort?: number): void {
+       for (const room of this.rooms){
+           if (minComfort !== undefined &&
+            minComfort < room.comfort ) {
+                room.printData();  
+            }    
+       }   
     }
 
+    //spausdinam Hotel info i konsole:
+    public printData(onlyComfort?: boolean): void {
+        console.log(`Name: ${this.name}`);
+        console.log(`Adress: ${this.adress}`);
+        console.log(`${this.stars} stars`);
+
+        if (onlyComfort === true) {
+            this.printRooms(15);
+        } else {
+            this.printRooms();
+        }
+    }
 }
 
 class Room {
-    size: number;
-    capacity: number;
+    public size: number;
+    public capacity: number;
 
     public constructor(size: number, capacity: number){
       this.size = size;
@@ -56,7 +61,8 @@ class Room {
     }
 
     //spausdinam Room info:
-    public printData(onlyComfort?: boolean): void {
+    public printData(): void {
+        console.log('------');
         console.log(`Kambario dydis: ${this.size} m2.`);
         console.log(`Asmenu kiekis: ${this.capacity} zmones.`);
         console.log(`Komforto lygis: ${this.comfort}.`);
@@ -65,8 +71,8 @@ class Room {
 }
 
 class Spa extends Room {
-    poolSize: number;
-    poolTemperature: number;
+    public poolSize: number;
+    public poolTemperature: number;
     
     constructor(poolSize: number,
                 poolTemperature: number){
@@ -81,7 +87,7 @@ class Spa extends Room {
     }
 
     //spausdinam Spa info:
-    public printData(onlyComfort?: boolean): void {
+    public printData(): void {
        super.printData();
        console.log(`Baseino dydis: ${this.poolSize} m2.`);
        console.log(`Vandens temperatura: ${this.poolTemperature} C.`);
@@ -92,22 +98,25 @@ class Spa extends Room {
 //sukuriam viesbuti
 const transylvania = new Hotel('Transylvania', 'Worms Eye 17', 5);
 
-//spausdinam viesbucio info
-transylvania.printData(true);
-
 //pridedam kambarius
-transylvania.addRoom(new Room(30,2));
-transylvania.addRoom(new Room(20,1));
-transylvania.addRoom(new Room(100,5));
-console.log('************');
+transylvania.addRoom(new Room(30, 2));
+transylvania.addRoom(new Room(25, 4));
+// transylvania.addRoom(new Room(100, 5));
+transylvania.addRoom(new Spa(10, 16));
+// transylvania.addRoom(new Spa(3, 18));
 
-console.log('Viesbutyje esantys kambariai:')
-transylvania.printRooms()
+//spausdinam viesbucio info
+transylvania.printData();
 
-const dvivietis = new Room(20,2)
-console.log('Dvivietis:', dvivietis);
-dvivietis.printData()
+console.log(`*********************`);
+console.log(`tik COMFORT:`);
+console.log(`*********************`);
 
-const spaRoom = new Spa(5,20)
-console.log('SPA Room:', spaRoom);
-spaRoom.printData()
+transylvania.printData(true);
+// console.log(transylvania.rooms);
+
+// const dvivietis = new Room(20,2)
+// dvivietis.printData()
+
+// const spaRoom = new Spa(5,20)
+// spaRoom.printData()
