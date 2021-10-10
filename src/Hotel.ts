@@ -52,9 +52,11 @@ class Hotel {
         console.log(`Name: ${this.name}`);
         console.log(`Adress: ${this.adress}`);
         console.log(`${this.stars} stars`);
+        
+        const comfortLvl = 15;
 
         if (onlyComfort) {
-            this.printRooms(15);
+            this.printRooms(comfortLvl);
         } else {
             this.printRooms();
         }
