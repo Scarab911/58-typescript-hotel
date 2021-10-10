@@ -1,9 +1,9 @@
 
 class Hotel {
-    public name: string;
-    public adress: string;
-    public stars: number;
-    public rooms: Room[];
+    public readonly name: string;
+    public readonly adress: string;
+    public readonly stars: number;
+    public readonly rooms: Room[];
 
     public constructor(name: string,
                  adress: string,
@@ -16,7 +16,7 @@ class Hotel {
     }
 
     // pridedam kambary i masyva:
-    addRoom(room: Room): void {
+    public addRoom(room: Room): void {
         this.rooms.push(room);
     }
     
@@ -25,6 +25,7 @@ class Hotel {
     private printRooms(minComfort?: number): void {
        for (const room of this.rooms){
           if (room.comfort > minComfort || minComfort === undefined) {
+              console.log('--------KAMBARYS----------');
               room.printData();
           }
        }   
@@ -61,8 +62,8 @@ class Hotel {
 }
 
 class Room {
-    public size: number;
-    public capacity: number;
+    public readonly size: number;
+    public readonly capacity: number;
 
     public constructor(size: number, capacity: number){
       this.size = size;
@@ -79,14 +80,13 @@ class Room {
         console.log(`Kambario dydis: ${this.size} m2.`);
         console.log(`Asmenu kiekis: ${this.capacity} zmones.`);
         console.log(`Komforto lygis: ${this.comfort}.`);
-        console.log('------');
         
     }
 }
 
 class Spa extends Room {
-    public poolSize: number;
-    public poolTemperature: number;
+    public readonly poolSize: number;
+    public readonly poolTemperature: number;
     
     constructor(size: number,
                 capacity: number,
@@ -102,14 +102,15 @@ class Spa extends Room {
         return (this.size - this.poolSize)/this.capacity;
     }
 
-    //spausdinam Spa info:
+    //spausdinam Spa Kambario info:
     public printData(): void {
        super.printData();
        console.log(`Baseino dydis: ${this.poolSize} m2.`);
        console.log(`Vandens temperatura: ${this.poolTemperature} C.`);
-       
     }
 }
+
+//EXECUTION BELOW
 
 //sukuriam viesbuti
 const transylvania = new Hotel('Transylvania', 'Worms Eye 17', 5);
@@ -117,9 +118,7 @@ const transylvania = new Hotel('Transylvania', 'Worms Eye 17', 5);
 //pridedam kambarius
 transylvania.addRoom(new Room(30, 2));
 transylvania.addRoom(new Room(25, 4));
-// transylvania.addRoom(new Room(100, 5));
 transylvania.addRoom(new Spa(40, 2, 5, 18));
-
 
 //spausdinam viesbucio info
 transylvania.printData();
@@ -128,10 +127,6 @@ console.log(`*********************`);
 console.log(`tik COMFORT:`);
 console.log(`*********************`);
 
+//spausdinam viesbucio info bet tik su kambariais kuriu
+//Komfortas > 15
 transylvania.printData(true);
-
-// const dvivietis = new Room(20,2)
-// dvivietis.printData()
-
-// const spaRoom = new Spa(5,20)
-// spaRoom.printData()
