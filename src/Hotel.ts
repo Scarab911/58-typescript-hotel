@@ -21,32 +21,30 @@ class Hotel {
     }
     
     //spausdinam kambarius
+    //Version 2->:
+    private printRooms(minComfort?: number): void {
+       for (const room of this.rooms){
+          if (room.comfort > minComfort || minComfort === undefined) {
+              room.printData();
+          }
+       }   
+    }
+    //Version 1->:
     // private printRooms(minComfort?: number): void {
+    //     let count = 1;
     //    for (const room of this.rooms){
            
-    //        if (minComfort !== undefined){
-
+    //        if (minComfort !== undefined){    
     //            if (room.comfort > minComfort) {
+    //                console.log(`***Kambarys numeris ${count++}.***`);
     //                room.printData()
-    //            }
-    //        } else {
+    //             }
+    //         } else {
+    //            console.log(`***Kambarys numeris ${count++}.***`);
     //            room.printData()
     //        }
     //    }   
     // }
-    private printRooms(minComfort?: number): void {
-       for (const room of this.rooms){
-           
-           if (minComfort !== undefined){
-
-               if (room.comfort > minComfort) {
-                   room.printData()
-               }
-           } else {
-               room.printData()
-           }
-       }   
-    }
 
     //spausdinam Hotel info i konsole:
     public printData(onlyComfort?: boolean): void {
@@ -78,10 +76,10 @@ class Room {
 
     //spausdinam Room info:
     public printData(): void {
-        console.log('------');
         console.log(`Kambario dydis: ${this.size} m2.`);
         console.log(`Asmenu kiekis: ${this.capacity} zmones.`);
         console.log(`Komforto lygis: ${this.comfort}.`);
+        console.log('------');
         
     }
 }
