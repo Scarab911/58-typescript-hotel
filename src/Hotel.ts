@@ -21,6 +21,19 @@ class Hotel {
     }
     
     //spausdinam kambarius
+    // private printRooms(minComfort?: number): void {
+    //    for (const room of this.rooms){
+           
+    //        if (minComfort !== undefined){
+
+    //            if (room.comfort > minComfort) {
+    //                room.printData()
+    //            }
+    //        } else {
+    //            room.printData()
+    //        }
+    //    }   
+    // }
     private printRooms(minComfort?: number): void {
        for (const room of this.rooms){
            
