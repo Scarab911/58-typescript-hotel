@@ -1,5 +1,3 @@
-// import { Room } from "./Room";
-// import { Spa } from "./Spa";
 
 class Hotel {
     public name: string;
@@ -25,10 +23,15 @@ class Hotel {
     //spausdinam kambarius
     private printRooms(minComfort?: number): void {
        for (const room of this.rooms){
-           if (minComfort !== undefined &&
-            minComfort < room.comfort ) {
-                room.printData();  
-            }    
+           
+           if (minComfort !== undefined){
+
+               if (room.comfort > minComfort) {
+                   room.printData()
+               }
+           } else {
+               room.printData()
+           }
        }   
     }
 
@@ -38,7 +41,7 @@ class Hotel {
         console.log(`Adress: ${this.adress}`);
         console.log(`${this.stars} stars`);
 
-        if (onlyComfort === true) {
+        if (onlyComfort) {
             this.printRooms(15);
         } else {
             this.printRooms();
@@ -74,9 +77,11 @@ class Spa extends Room {
     public poolSize: number;
     public poolTemperature: number;
     
-    constructor(poolSize: number,
+    constructor(size: number,
+                capacity: number,
+                poolSize: number,
                 poolTemperature: number){
-        super(40, 2)
+        super(size, capacity)
         this.poolSize = poolSize;
         this.poolTemperature = poolTemperature;
     }
@@ -102,8 +107,8 @@ const transylvania = new Hotel('Transylvania', 'Worms Eye 17', 5);
 transylvania.addRoom(new Room(30, 2));
 transylvania.addRoom(new Room(25, 4));
 // transylvania.addRoom(new Room(100, 5));
-transylvania.addRoom(new Spa(10, 16));
-// transylvania.addRoom(new Spa(3, 18));
+transylvania.addRoom(new Spa(40, 2, 5, 18));
+
 
 //spausdinam viesbucio info
 transylvania.printData();
@@ -113,7 +118,6 @@ console.log(`tik COMFORT:`);
 console.log(`*********************`);
 
 transylvania.printData(true);
-// console.log(transylvania.rooms);
 
 // const dvivietis = new Room(20,2)
 // dvivietis.printData()
