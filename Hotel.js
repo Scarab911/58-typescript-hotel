@@ -1,4 +1,3 @@
-"use strict";
 class Hotel {
     constructor(name, adress, stars) {
         this.name = name;
@@ -73,8 +72,9 @@ UI.button.addEventListener('click', () => {
     const poolSize = +(UI.poolSize.value);
     const poolTemperature = +(UI.temperature.value);
     if (size === 0 ||
-        capacity === 0) {
-        console.error('ERROR: Cannot add Room without size or capacity');
+        capacity === 0 ||
+        size <= poolSize) {
+        console.error('ERROR: Cannot add Room without size or capacity or pool bigger than room size');
         return;
     }
     if (size < 0 ||
