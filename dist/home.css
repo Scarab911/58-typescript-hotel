@@ -159,17 +159,7 @@ button {
   font-weight: 700;
   letter-spacing: 5px;
 }
-button i {
-  margin-left: 10px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-transition-duration: 0.1s;
-  transition-duration: 0.1s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
+
 button:before {
   content: '';
   position: absolute;
@@ -196,10 +186,6 @@ button:hover {
 button:hover:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
-}
-button:hover i {
-  -webkit-transform: translateX(4px);
-  transform: translateX(4px);
 }
 
 .output {
