@@ -23,6 +23,10 @@ body {
   color: #fff;
   font-size: 15px;
   margin: 0;
+  background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX15245297.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 input,
@@ -84,7 +88,7 @@ p {
   font-size: 15px;
   color: #00ade6;
   position: absolute;
-  top: 11px;
+  top: 20px;
   transition: all 0.2s ease;
   transform-origin: 0 0;
   cursor: text;
@@ -131,8 +135,8 @@ textarea.form-control {
 
 button {
   border: none;
-  width: 162px;
-  height: 51px;
+  width: 140px;
+  height: 40px;
   border: 2px solid #fff;
   margin: auto;
   margin-top: 35px;
@@ -208,12 +212,12 @@ button:hover i {
 }
 .card {
   text-align: center;
-  border: 1px solid #0000ff;
+  border: 1px solid #000070;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   padding: 5px;
-  background-color: #39459b;
+  background-color: #39449ba8;
   color: #fff;
 }
 
