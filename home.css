@@ -191,10 +191,10 @@ button:hover:before {
 .output {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 30px 130px;
   margin-top: 30px;
   justify-content: stretch;
-  padding: 5px 50px;
+  padding: 5px 112px;
 }
 .card {
   text-align: center;
@@ -216,7 +216,15 @@ button:hover:before {
     font-size: 14px;
     padding: 0;
   }
-
+  .form-group {
+    margin: 0;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
   .inner {
     padding: 27px 20px 37px;
     border: none;
@@ -230,6 +238,10 @@ button:hover:before {
   .wrapper {
     background: #39459b;
     border: 10px solid #0d99d7;
+  }
+
+  .output {
+    grid-template-columns: 1fr;
   }
 }
 
