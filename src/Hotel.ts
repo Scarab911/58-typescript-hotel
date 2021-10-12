@@ -3,7 +3,7 @@ class Hotel {
     public readonly name: string;
     public readonly adress: string;
     public readonly stars: number;
-    public readonly rooms: Room[];
+    public rooms: Room[];
 
     public constructor(name: string,
                  adress: string,
@@ -114,21 +114,61 @@ class Spa extends Room {
 
 //EXECUTION BELOW
 
-//sukuriam viesbuti
+// //sukuriam viesbuti
 const transylvania = new Hotel('Transylvania', 'Worms Eye 17', 5);
 
-//pridedam kambarius
-transylvania.addRoom(new Room(30, 2));
-transylvania.addRoom(new Room(25, 4));
-transylvania.addRoom(new Spa(40, 2, 5, 18));
+// //pridedam kambarius
+// transylvania.addRoom(new Room(30, 2));
+// transylvania.addRoom(new Room(25, 4));
+// transylvania.addRoom(new Spa(40, 2, 5, 18));
 
-//spausdinam viesbucio info
-transylvania.printData();
+// //spausdinam viesbucio info
+// transylvania.printData();
 
-console.log(`*********************`);
-console.log(`tik COMFORT:`);
-console.log(`*********************`);
+// console.log(`*********************`);
+// console.log(`tik COMFORT:`);
+// console.log(`*********************`);
 
-//spausdinam viesbucio info bet tik su kambariais kuriu
-//Komfortas > 15
-transylvania.printData(true);
+// //spausdinam viesbucio info bet tik su kambariais kuriu
+// //Komfortas > 15
+// transylvania.printData(true);
+
+const UI = {
+    roomSize: document.getElementById('size') as HTMLInputElement,
+    capacity: document.getElementById('capacity') as HTMLInputElement,
+    poolSize: document.getElementById('pool-size') as HTMLInputElement,
+    temperature: document.getElementById('water') as HTMLInputElement,
+    button: document.getElementById('button') as HTMLInputElement,
+}
+let listOfRooms = [];
+
+UI.button.addEventListener('click', () => {
+    const size = Number(UI.roomSize.value); //pakeiciam tipa su number()
+    const capacity = +(UI.capacity.value);// arba su +
+    const poolSize = +(UI.poolSize.value);
+    const poolTemperature = +(UI.temperature.value);
+
+    //Validations
+    if(size === 0 ||
+        capacity === 0){
+            console.error('ERROR: Cannot add Room without size or capacity');
+            return
+    }
+
+    if (size < 0 ||
+        capacity < 0 ||
+        poolSize < 0 ||
+        poolTemperature < 0) {
+        console.error('ERROR: parameter has to be a positive number');
+        return
+    }
+
+    if (poolSize === 0 ||
+        poolTemperature === 0) {
+        
+        transylvania.addRoom(new Room(size, capacity));
+    } else {
+        transylvania.addRoom(new Spa(size, capacity, poolSize, poolTemperature));
+    }
+    transylvania.printData()
+});
