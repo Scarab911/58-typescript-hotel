@@ -1,3 +1,4 @@
+"use strict";
 class Hotel {
     constructor(name, adress, stars) {
         this.name = name;
@@ -66,7 +67,6 @@ const UI = {
     temperature: document.getElementById('water'),
     button: document.getElementById('button'),
 };
-let listOfRooms = [];
 UI.button.addEventListener('click', () => {
     const size = Number(UI.roomSize.value);
     const capacity = +(UI.capacity.value);

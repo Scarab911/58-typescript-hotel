@@ -140,8 +140,8 @@ const UI = {
     temperature: document.getElementById('water') as HTMLInputElement,
     button: document.getElementById('button') as HTMLInputElement,
 }
-let listOfRooms = [];
 
+//adding event listener to button to gather data from inputs 
 UI.button.addEventListener('click', () => {
     const size = Number(UI.roomSize.value); //pakeiciam tipa su number()
     const capacity = +(UI.capacity.value);// arba su +
@@ -171,4 +171,7 @@ UI.button.addEventListener('click', () => {
         transylvania.addRoom(new Spa(size, capacity, poolSize, poolTemperature));
     }
     transylvania.printData()
+
+    //Render Room Card
+    
 });
