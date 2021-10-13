@@ -65,6 +65,7 @@ const UI = {
     poolSize: document.getElementById('pool-size'),
     temperature: document.getElementById('water'),
     button: document.getElementById('button'),
+    cardsContainer: document.querySelector('.output'),
 };
 UI.button.addEventListener('click', () => {
     const size = Number(UI.roomSize.value);
@@ -91,5 +92,11 @@ UI.button.addEventListener('click', () => {
     else {
         transylvania.addRoom(new Spa(size, capacity, poolSize, poolTemperature));
     }
-    transylvania.printData();
+    UI.cardsContainer.innerHTML += `<div class="card">
+                            <h3 class="room-name">Kambarys</h3>
+                            <p class="room-size">Room size:${size} m2</p>
+                            <p class="capacity">Capacity: ${capacity} persons</p>
+                            <p class="pool-size">Pool size: ${poolSize} m2</p>
+                            <p class="water-temperature">Water ${poolTemperature} temperature: C</p>
+                        </div>`;
 });

@@ -21,31 +21,15 @@ class Hotel {
     }
     
     //spausdinam kambarius
-    //Version 2->:
     private printRooms(minComfort?: number): void {
        for (const room of this.rooms){
+           
           if (room.comfort > minComfort || minComfort === undefined) {
               console.log('--------KAMBARYS----------');
               room.printData();
           }
        }   
     }
-    //Version 1->:
-    // private printRooms(minComfort?: number): void {
-    //     let count = 1;
-    //    for (const room of this.rooms){
-           
-    //        if (minComfort !== undefined){    
-    //            if (room.comfort > minComfort) {
-    //                console.log(`***Kambarys numeris ${count++}.***`);
-    //                room.printData()
-    //             }
-    //         } else {
-    //            console.log(`***Kambarys numeris ${count++}.***`);
-    //            room.printData()
-    //        }
-    //    }   
-    // }
 
     //spausdinam Hotel info i konsole:
     public printData(onlyComfort?: boolean): void {
@@ -82,13 +66,12 @@ class Room {
         console.log(`Kambario dydis: ${this.size} m2.`);
         console.log(`Asmenu kiekis: ${this.capacity} zmones.`);
         console.log(`Komforto lygis: ${this.comfort}.`);
-        
     }
 }
 
 class Spa extends Room {
-    public readonly poolSize: number;
-    public readonly poolTemperature: number;
+    public poolSize: number;
+    public poolTemperature: number;
     
     constructor(size: number,
                 capacity: number,
@@ -106,9 +89,9 @@ class Spa extends Room {
 
     //spausdinam Spa Kambario info:
     public printData(): void {
-       super.printData();
-       console.log(`Baseino dydis: ${this.poolSize} m2.`);
-       console.log(`Vandens temperatura: ${this.poolTemperature} C.`);
+        super.printData();
+        console.log(`Baseino dydis: ${this.poolSize} m2.`);
+        console.log(`Vandens temperatura: ${this.poolTemperature} C.`);
     }
 }
 
@@ -139,6 +122,7 @@ const UI = {
     poolSize: document.getElementById('pool-size') as HTMLInputElement,
     temperature: document.getElementById('water') as HTMLInputElement,
     button: document.getElementById('button') as HTMLInputElement,
+    cardsContainer: document.querySelector<HTMLDivElement>('.output'),
 }
 
 //adding event listener to button to gather data from inputs 
@@ -171,8 +155,30 @@ UI.button.addEventListener('click', () => {
     } else {
         transylvania.addRoom(new Spa(size, capacity, poolSize, poolTemperature));
     }
-    transylvania.printData()
 
-    //Render Room Card
+    // console.log(transylvania.rooms);
     
+    
+    //Render Room Card
+    // UI.cardsContainer.innerHTML = '';
+   
+     
+    UI.cardsContainer.innerHTML += `<div class="card">
+                            <h3 class="room-name">Kambarys</h3>
+                            <p class="room-size">Room size:${size} m2</p>
+                            <p class="capacity">Capacity: ${capacity} persons</p>
+                            <p class="pool-size">Pool size: ${poolSize} m2</p>
+                            <p class="water-temperature">Water ${poolTemperature} temperature: C</p>
+                        </div>` 
+
 });
+
+
+// function render(): void {
+//     UI.cardsContainer.innerHTML = '';
+
+//     for(const {size, capacity, poolSize, poolTemperature} of transylvania.rooms){
+//         addHTML(UI.cardsContainer);
+//     }
+// }
+
