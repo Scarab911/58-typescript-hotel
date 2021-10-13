@@ -8,25 +8,19 @@ class Hotel {
     addRoom(room) {
         this.rooms.push(room);
     }
-    printRooms(minComfort) {
+    printRooms(element, minComfort) {
         for (const room of this.rooms) {
             if (room.comfort > minComfort || minComfort === undefined) {
                 console.log('--------KAMBARYS----------');
-                room.printData();
+                room.printData(element);
             }
         }
     }
-    printData(onlyComfort) {
+    printData(element, onlyComfort) {
         console.log(`Name: ${this.name}`);
         console.log(`Adress: ${this.adress}`);
         console.log(`${this.stars} stars`);
-        const comfortLvl = 15;
-        if (onlyComfort) {
-            this.printRooms(comfortLvl);
-        }
-        else {
-            this.printRooms();
-        }
+        this.printRooms(element);
     }
 }
 class Room {
@@ -37,10 +31,15 @@ class Room {
     get comfort() {
         return this.size / this.capacity;
     }
-    printData() {
+    printData(element) {
         console.log(`Kambario dydis: ${this.size} m2.`);
         console.log(`Asmenu kiekis: ${this.capacity} zmones.`);
         console.log(`Komforto lygis: ${this.comfort}.`);
+        element.innerHTML += `<div class="card">
+                                <h3 class="room-name">Kambarys</h3>
+                                <p class="room-size">Room size: ${this.size} m2</p>
+                                <p class="capacity">Capacity: ${this.capacity} persons</p>
+                            </div>`;
     }
 }
 class Spa extends Room {
@@ -52,10 +51,14 @@ class Spa extends Room {
     get comfort() {
         return (this.size - this.poolSize) / this.capacity;
     }
-    printData() {
-        super.printData();
-        console.log(`Baseino dydis: ${this.poolSize} m2.`);
-        console.log(`Vandens temperatura: ${this.poolTemperature} C.`);
+    printData(element) {
+        element.innerHTML += `<div class="card">
+                            <h3 class="room-name">Kambarys</h3>
+                            <p class="room-size">Room size: ${this.size} m2</p>
+                            <p class="capacity">Capacity: ${this.capacity} persons</p>
+                            <p class="pool-size">Pool size: ${this.poolSize} m2</p>
+                            <p class="water-temperature">Water ${this.poolTemperature} temperature: C</p>
+                        </div>`;
     }
 }
 const transylvania = new Hotel('Transylvania', 'Worms Eye 17', 5);
@@ -92,11 +95,9 @@ UI.button.addEventListener('click', () => {
     else {
         transylvania.addRoom(new Spa(size, capacity, poolSize, poolTemperature));
     }
-    UI.cardsContainer.innerHTML += `<div class="card">
-                            <h3 class="room-name">Kambarys</h3>
-                            <p class="room-size">Room size:${size} m2</p>
-                            <p class="capacity">Capacity: ${capacity} persons</p>
-                            <p class="pool-size">Pool size: ${poolSize} m2</p>
-                            <p class="water-temperature">Water ${poolTemperature} temperature: C</p>
-                        </div>`;
+    render();
 });
+function render() {
+    UI.cardsContainer.innerHTML = '';
+    transylvania.printData(UI.cardsContainer);
+}
